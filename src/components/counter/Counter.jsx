@@ -3,7 +3,6 @@ import { useLocalStorage } from "usehooks-ts";
 
 import { normalize } from "../../utils/normalize";
 import Circle from "../circle";
-import Color from "../color";
 import { toNumber } from "../../utils/toNumber";
 
 const COUNT = "count";
@@ -19,8 +18,8 @@ const LAST_UPDATE = "lastUpdate";
 const DAY = "day";
 const DEFAULT_DAY = 1;
 
-const COLOR = "color";
-const DEFAULT_COLOR = "#514690";
+const CIRCLE_COLOR = "circleColor";
+const DEFAULT_CIRCLE_COLOR = "#514690";
 
 const MS_IN_DAY = 86400000;
 
@@ -68,12 +67,11 @@ const useCheckDay = () => {
 
 const Counter = () => {
   const [count, setCount] = useLocalStorage(COUNT, DEFAULT_COUNT).map(toNumber);
-  const [maxCount, setMaxCount] = useLocalStorage(
-    MAX_COUNT,
-    DEFAULT_MAX_COUNT
-  ).map(toNumber);
-  const [day, setDay] = useLocalStorage(DAY, DEFAULT_DAY).map(toNumber);
-  const [color, setColor] = useLocalStorage(COLOR, DEFAULT_COLOR);
+  const [maxCount] = useLocalStorage(MAX_COUNT, DEFAULT_MAX_COUNT).map(
+    toNumber
+  );
+  const [day] = useLocalStorage(DAY, DEFAULT_DAY).map(toNumber);
+  const [circleColor] = useLocalStorage(CIRCLE_COLOR, DEFAULT_CIRCLE_COLOR);
 
   useCheckDay();
 
@@ -104,12 +102,10 @@ const Counter = () => {
         onChange={(e) => setCount(e.target.value)}
       /> */}
       <Circle
-        color={color}
+        color={circleColor}
         deg={normalize(count, 0, maxCount, 0, 360)}
         onClick={onCircleClick}
       />
-
-      <Color />
     </>
   );
 };

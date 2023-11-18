@@ -1,0 +1,17 @@
+.side-menu {
+    height: calc(100vh - 43px);
+    position: absolute;
+    top: 43px;
+    left: 0;
+    width: 200px;
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: 0.19s ease-in;
+    background-color: #151327;
+    /* opacity: 0.9; */
+}
+
+.side-menu--open {
+    opacity: 0.9;
+    transform: translateX(0);
+}

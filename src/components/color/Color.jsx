@@ -1,20 +1,21 @@
 import React from "react";
-import { useLocalStorage } from "usehooks-ts";
 
-const COLOR = "color";
-const DEFAULT_COLOR = "#514690";
-
-const Color = () => {
-  const [color, setColor] = useLocalStorage(COLOR, DEFAULT_COLOR);
+const Color = ({ color, onChange, reset, name, label }) => {
+  // const [color, setColor] = useLocalStorage(COLOR, DEFAULT_COLOR);
   return (
-    <>
+    <div>
+      <label htmlFor={name}>{label}</label>
       <input
+        id={name}
+        name={name}
         type="color"
         value={color}
-        onChange={(e) => setColor(e.target.value)}
+        onChange={onChange}
       />
-      <button type="button" onClick={() => setColor(DEFAULT_COLOR)}>Reset</button>
-    </>
+      <button type="button" onClick={reset}>
+        Reset
+      </button>
+    </div>
   );
 };
 
