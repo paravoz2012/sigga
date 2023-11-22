@@ -1,5 +1,6 @@
+import {useRef} from "react";
 import cn from "classnames";
-import { useLocalStorage } from "usehooks-ts";
+import { useLocalStorage, useOnClickOutside } from "usehooks-ts";
 
 import Color from "../color";
 
@@ -11,7 +12,7 @@ const DEFAULT_CIRCLE_COLOR = "#514690";
 const BG_COLOR = "bgColor";
 const DEFAULT_BG_COLOR = "#151327";
 
-const SideMenu = ({ isOpen }) => {
+const SideMenu = ({ isOpen, closeMenu }) => {
   const [circleColor, setCircleColor] = useLocalStorage(
     CIRCLE_COLOR,
     DEFAULT_CIRCLE_COLOR
@@ -19,8 +20,12 @@ const SideMenu = ({ isOpen }) => {
 
   const [bgColor, setBgColor] = useLocalStorage(BG_COLOR, DEFAULT_BG_COLOR);
 
+  const asideRef = useRef(null);
+
+  useOnClickOutside(asideRef, closeMenu);
+
   return (
-    <aside className={cn("side-menu", { "side-menu--open": isOpen })}>
+    <aside className={cn("side-menu", { "side-menu--open": isOpen })} ref={asideRef}>
       SideMenu
       <Color
         color={circleColor}
